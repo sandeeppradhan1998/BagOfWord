@@ -32,7 +32,7 @@ lm=WordNetLemmatizer()
 
 corpus=[]
 for i in range(len(sentences)):
-    review=re.sub('[a-zA-Z]',' ',sentences[i])
+    review=re.sub('[^a-zA-Z]',' ',sentences[i])
     review=review.lower()
     review=review.split()
     review=[lm.lemmatize(word) for word in review if not word in set(stopwords.words('english'))]
@@ -40,7 +40,7 @@ for i in range(len(sentences)):
     corpus.append(review)
  
 #import bagofwords
-from nltk.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 cv= CountVectorizer()
 x=cv.fit_transform(corpus).toarray()
 
